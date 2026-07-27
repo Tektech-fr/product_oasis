@@ -1,6 +1,5 @@
 use eframe::egui;
 
-#[derive(Default)]
 struct GameApp;
 
 
