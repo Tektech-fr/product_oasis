@@ -1,4 +1,4 @@
-#[derive(Default)]
-pub struct GameApp;
+mod game_app;
+mod menu;
 
-pub mod board;
+pub use game_app::GameApp;
