@@ -11,6 +11,8 @@ impl GameApp {
             .fit_to_exact_size(screen.size())
             .paint_at(ui, ui.max_rect());
 
+        self.board.draw(ui);
+
         if ui.input(|i| i.key_pressed(egui::Key::Escape)) {
             self.state = AppState::MainMenu;
 

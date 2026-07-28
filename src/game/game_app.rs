@@ -1,5 +1,7 @@
 use eframe::egui;
 
+use super::board::Board;
+
 #[derive(PartialEq)]
 pub(super) enum AppState {
     MainMenu,
@@ -7,12 +9,14 @@ pub(super) enum AppState {
 }
 pub struct GameApp {
     pub(super) state: AppState,
+    pub(super) board: Board,
 }
 
 impl Default for GameApp {
     fn default() -> Self {
         Self {
             state: AppState::MainMenu,
+            board: Board::new(),
         }
     }
 }
