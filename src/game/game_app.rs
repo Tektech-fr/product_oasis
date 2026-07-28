@@ -19,10 +19,6 @@ impl Default for GameApp {
 
 impl eframe::App for GameApp {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
-        if ui.input(|i| i.key_pressed(egui::Key::Escape)) {
-            ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
-        }
-
         egui::CentralPanel::default()
             .frame(egui::Frame::NONE)
             .show(ui, |ui| {
@@ -39,6 +35,10 @@ impl eframe::App for GameApp {
 
                 if self.state == AppState::MainMenu {
                     self.show_main_menu(ui);
+                }
+
+                if self.state == AppState::Playing {
+                    self.play_game(ui);
                 }
             });
     }
