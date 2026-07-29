@@ -2,33 +2,39 @@ use eframe::egui;
 
 pub(super) struct Zone {
     title: String,
-    relative_pos: egui::Vec2,
-    relative_size: egui::Vec2,
+    left: f32,
+    top: f32,
+    width: f32,
+    height: f32,
 }
 
 impl Zone {
     pub(super) fn new(
         title: impl Into<String>,
-        relative_pos: egui::Vec2,
-        relative_size: egui::Vec2,
+        left: usize,
+        top: usize,
+        width: usize,
+        height: usize,
     ) -> Self {
         Self {
             title: title.into(),
-            relative_pos,
-            relative_size,
+            left: left as f32 * 0.01,
+            top: top as f32 * 0.01,
+            width: width as f32 * 0.01,
+            height: height as f32 * 0.01,
         }
     }
 
     fn rect_within(&self, board_rect: egui::Rect) -> egui::Rect {
         let min = board_rect.min
             + egui::vec2(
-                self.relative_pos.x * board_rect.width(),
-                self.relative_pos.y * board_rect.height(),
+                self.left * board_rect.width(),
+                self.top * board_rect.height(),
             );
 
         let size = egui::vec2(
-            self.relative_size.x * board_rect.width(),
-            self.relative_size.y * board_rect.height(),
+            self.width * board_rect.width(),
+            self.height * board_rect.height(),
         );
 
         egui::Rect::from_min_size(min, size)
