@@ -5,6 +5,12 @@ use super::game_app::{AppState, GameApp};
 impl GameApp {
     pub(super) fn show_main_menu(&mut self, ui: &mut egui::Ui) {
         let screen = ui.max_rect();
+        let background = egui::include_image!("../../assets/bg_branded.webp");
+
+        egui::Image::new(background)
+            .fit_to_exact_size(screen.size())
+            .paint_at(ui, ui.max_rect());
+
         let menu_rect = egui::Rect::from_min_size(
             screen.min,
             egui::vec2(screen.width() / 3.0, screen.height()),
