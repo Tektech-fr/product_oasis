@@ -1,18 +1,22 @@
 use eframe::egui;
 
-use super::board::Board;
+use crate::board::Board;
+
+mod menu;
+mod playing;
 
 #[derive(PartialEq)]
-pub(super) enum AppState {
+pub(crate) enum AppState {
     MainMenu,
     Playing,
 }
-pub struct GameApp {
-    pub(super) state: AppState,
-    pub(super) board: Board,
+
+pub struct App {
+    pub(crate) state: AppState,
+    pub(crate) board: Board,
 }
 
-impl Default for GameApp {
+impl Default for App {
     fn default() -> Self {
         Self {
             state: AppState::MainMenu,
@@ -21,7 +25,7 @@ impl Default for GameApp {
     }
 }
 
-impl eframe::App for GameApp {
+impl eframe::App for App {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default()
             .frame(egui::Frame::NONE)

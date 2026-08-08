@@ -1,8 +1,8 @@
 use eframe::egui;
 
-use super::game_app::{AppState, GameApp};
+use super::{App, AppState};
 
-impl GameApp {
+impl App {
     pub(super) fn show_main_menu(&mut self, ui: &mut egui::Ui) {
         let screen = ui.max_rect();
         let background = egui::include_image!("../../assets/bg_branded.webp");

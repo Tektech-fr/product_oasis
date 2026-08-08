@@ -1,7 +1,10 @@
 use eframe::egui;
 
-mod game;
-use game::GameApp;
+mod app;
+mod board;
+mod card;
+
+use app::App;
 
 fn main() -> eframe::Result<()> {
     let options = eframe::NativeOptions {
@@ -14,7 +17,7 @@ fn main() -> eframe::Result<()> {
         options,
         Box::new(|cc| {
             egui_extras::install_image_loaders(&cc.egui_ctx);
-            Ok(Box::new(GameApp::default()))
+            Ok(Box::new(App::default()))
         }),
     )
 }
