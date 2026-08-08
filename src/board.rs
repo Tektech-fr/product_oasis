@@ -6,6 +6,8 @@ mod zones;
 use regions::{Layout, Region};
 use zones::{CardOrientation, Zone};
 
+use crate::theme::{colors, ratios, sizes};
+
 struct Bounds {
     x0: f32,
     x1: f32,
@@ -125,13 +127,13 @@ impl Board {
 
     pub(crate) fn draw(&self, ui: &mut egui::Ui) {
         let window = ui.max_rect();
-        let board_size = window.size() * 0.9;
+        let board_size = window.size() * ratios::BOARD_SIZE;
         let board_rect = egui::Rect::from_center_size(window.center(), board_size);
 
         ui.painter().rect_stroke(
             board_rect,
             0,
-            egui::Stroke::new(3.0, egui::Color32::WHITE),
+            egui::Stroke::new(sizes::BOARD_STROKE_WIDTH_PX, colors::BOARD_STROKE),
             egui::StrokeKind::Inside,
         );
 

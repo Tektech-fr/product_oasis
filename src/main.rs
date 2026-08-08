@@ -3,6 +3,7 @@ use eframe::egui;
 mod app;
 mod board;
 mod card;
+mod theme;
 
 use app::App;
 

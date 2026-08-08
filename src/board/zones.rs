@@ -1,8 +1,12 @@
 use eframe::egui;
 
-use crate::card::{CARD_SIZE, Card};
-
-const ZONE_MARGIN: f32 = 10.0;
+use crate::{
+    card::{CARD_SIZE, Card},
+    theme::{
+        colors, fonts,
+        sizes::{self, ZONE_MARGIN_PX},
+    },
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(super) enum CardOrientation {
@@ -19,7 +23,7 @@ impl CardOrientation {
     }
 
     fn zone_size(self) -> egui::Vec2 {
-        self.card_size() + egui::vec2(ZONE_MARGIN, ZONE_MARGIN)
+        self.card_size() + egui::vec2(ZONE_MARGIN_PX, ZONE_MARGIN_PX)
     }
 }
 
@@ -50,13 +54,12 @@ impl Zone {
     pub(super) fn draw(&self, ui: &mut egui::Ui, center: egui::Pos2) {
         let rect = egui::Rect::from_center_size(center, self.size());
 
-        ui.painter()
-            .rect_filled(rect, 2, egui::Color32::from_black_alpha(80));
+        ui.painter().rect_filled(rect, 2, colors::ZONE_FILL);
 
         ui.painter().rect_stroke(
             rect,
-            2,
-            egui::Stroke::new(1.5, egui::Color32::WHITE),
+            sizes::ZONE_CORNER_RADIUS_PX,
+            egui::Stroke::new(sizes::ZONE_STROKE_WIDTH_PX, colors::ZONE_STROKE),
             egui::StrokeKind::Inside,
         );
 
@@ -70,8 +73,8 @@ impl Zone {
                     center,
                     egui::Align2::CENTER_CENTER,
                     &self.title,
-                    egui::FontId::proportional(14.0),
-                    egui::Color32::WHITE,
+                    egui::FontId::proportional(fonts::ZONE_TITLE_SIZE),
+                    colors::ZONE_TEXT,
                 );
             }
         }
