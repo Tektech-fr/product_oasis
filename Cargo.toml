@@ -1,19 +1,7 @@
 [package]
-name = "oasis"
-version = "0.2.1"
+name = "oasis_des_tournesols"
+version = "0.5.0"
 edition = "2024"
 
 [dependencies]
-eframe = { version = "0.35.0", default-features = false, features = [
-    "default_fonts",
-    "wgpu",
-    "x11",
-    "wayland",
-] }
-egui_extras = { version = "0.35.0", features = ["webp"] }
-
-[profile.release]
-strip = true
-lto = true
-codegen-units = 1
-opt-level = "z"
+eframe = "0.36.1"
