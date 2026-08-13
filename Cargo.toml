@@ -1,7 +1,8 @@
 [package]
 name = "oasis_des_tournesols"
-version = "0.5.0"
+version = "0.5.2"
 edition = "2024"
 
 [dependencies]
 eframe = "0.36.1"
+egui_extras = { version = "0.36.1", features = ["image", "webp"] }
