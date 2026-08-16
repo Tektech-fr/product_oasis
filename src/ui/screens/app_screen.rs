@@ -1,7 +1,7 @@
 use eframe::egui;
 
-use crate::app::controller::{App as Application, AppEffect, AppEvent};
 use crate::app::app_state::AppState;
+use crate::app::controller::{App as Application, AppEffect, AppEvent};
 use crate::ui::screens::game_screen;
 use crate::ui::views::drag_state::DragState;
 use crate::ui::views::menu_view::{self, MenuAction};
@@ -16,6 +16,7 @@ pub struct OasisApp {
 impl OasisApp {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         cc.egui_ctx.set_visuals(egui::Visuals::dark());
+        egui_extras::install_image_loaders(&cc.egui_ctx);
         Self::default()
     }
 }
@@ -41,7 +42,9 @@ impl eframe::App for OasisApp {
                 }
             }
             AppState::Playing(game) => {
-                if let Some(ev) = game_screen::show(ui, game, &mut self.drag) {
+                if ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+                    self.pending_event = Some(AppEvent::ReturnToMenu);
+                } else if let Some(ev) = game_screen::show(ui, game, &mut self.drag) {
                     self.pending_event = Some(ev);
                 }
             }

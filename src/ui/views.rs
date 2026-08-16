@@ -1,8 +1,10 @@
+pub mod background_view;
 pub mod board_view;
 pub mod card_view;
 pub mod discard_view;
 pub mod drag_state;
 pub mod drag_types;
+pub mod game_view;
 pub mod geom_view;
 pub mod menu_view;
 pub mod theme;

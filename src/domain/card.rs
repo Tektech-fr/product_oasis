@@ -16,6 +16,5 @@ pub struct Card {
     pub id: u32,
     pub name: String,
     pub description: String,
-    pub image_path: String,
     pub kind: CardKind,
 }

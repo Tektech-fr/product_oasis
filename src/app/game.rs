@@ -15,23 +15,20 @@ impl Game {
         let starter = [
             Card {
                 id: 1,
-                name: "Membre de l'Oasis".into(),
-                description: String::new(),
-                image_path: String::new(),
+                name: "Toto".into(),
+                description: "Membre de l'Oasis".into(),
                 kind: CardKind::Character,
             },
             Card {
                 id: 2,
                 name: "Cabane".into(),
-                description: String::new(),
-                image_path: String::new(),
+                description: "Un endroit pour se loger".into(),
                 kind: CardKind::Building,
             },
             Card {
                 id: 3,
                 name: "Saison : Été".into(),
-                description: String::new(),
-                image_path: String::new(),
+                description: "La canicule, y a que ça de vrai".into(),
                 kind: CardKind::Season,
             },
         ];
@@ -42,7 +39,7 @@ impl Game {
         }
     }
 
-    /// Places a tray card on `zone`. No-op if the card isn't a placeable kind.
+    /// Places a tray card on `zone`.
     pub fn place_from_tray(&mut self, slot: usize, card: Card, zone: ZoneId) {
         if card.kind.is_placeable() {
             self.board.place(zone, card);
