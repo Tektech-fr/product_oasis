@@ -1,5 +1,7 @@
-use eframe::egui::{self, Button, Image, ImageSource, Ui, vec2};
+use eframe::egui::{self, Button, ImageSource, Ui, vec2};
 use egui_extras::{Size, StripBuilder};
+
+use crate::ui::views::background_view::paint_fullscreen;
 
 #[derive(Clone, Copy)]
 pub enum MenuAction {
@@ -7,10 +9,11 @@ pub enum MenuAction {
     Quit,
 }
 
-const BACKGROUND: ImageSource<'static> = egui::include_image!(concat!(
+const BACKGROUND_MENU: ImageSource<'static> = egui::include_image!(concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/shared/bg_yellow_board.webp"
 ));
+
 const TITLE: ImageSource<'static> =
     egui::include_image!(concat!(env!("CARGO_MANIFEST_DIR"), "/shared/bg_title.webp"));
 
@@ -26,10 +29,7 @@ const BUTTON_HEIGHT: f32 = 70.0;
 const BUTTON_GAP: f32 = 40.0;
 
 pub fn show(ui: &mut Ui) -> Option<MenuAction> {
-    let screen = ui.max_rect();
-    Image::new(BACKGROUND)
-        .fit_to_exact_size(screen.size())
-        .paint_at(ui, screen);
+    paint_fullscreen(ui, BACKGROUND_MENU);
 
     let mut action = None;
 
@@ -42,7 +42,7 @@ pub fn show(ui: &mut Ui) -> Option<MenuAction> {
                     .size(Size::relative(TITLE_HEIGHT_RATIO))
                     .size(Size::remainder())
                     .vertical(|mut strip| {
-                        strip.cell(show_title);
+                        strip.cell(|ui| paint_fullscreen(ui, TITLE));
                         strip.cell(|ui| action = show_buttons(ui));
                     });
             });
@@ -50,13 +50,6 @@ pub fn show(ui: &mut Ui) -> Option<MenuAction> {
         });
 
     action
-}
-
-fn show_title(ui: &mut Ui) {
-    let area = ui.max_rect();
-    Image::new(TITLE)
-        .fit_to_exact_size(area.size())
-        .paint_at(ui, area);
 }
 
 fn show_buttons(ui: &mut Ui) -> Option<MenuAction> {
