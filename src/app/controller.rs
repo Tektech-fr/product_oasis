@@ -7,6 +7,7 @@ use crate::domain::zone::ZoneId;
 pub enum AppEvent {
     StartNewGame,
     Quit,
+    ReturnToMenu,
     CardDropped(DropIntent),
 }
 
@@ -40,6 +41,10 @@ impl App {
                 AppEffect::None
             }
             AppEvent::Quit => AppEffect::QuitApp,
+            AppEvent::ReturnToMenu => {
+                self.state = AppState::Menu;
+                AppEffect::None
+            }
             AppEvent::CardDropped(intent) => {
                 match intent {
                     DropIntent::DiscardFromZone(from) => {
