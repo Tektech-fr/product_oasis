@@ -7,10 +7,11 @@ use crate::ui::views::drag_state::DragState;
 use crate::ui::views::drag_types::CardOrigin;
 use crate::ui::views::geom_view::{fit_aspect, nearest_zone};
 use crate::ui::views::theme::layout::{BOARD_MARGIN, DISCARD_HEIGHT_FRACTION, SIDE_WIDTH_FRACTION};
-use crate::ui::views::{board_view, discard_view, tray_view};
+use crate::ui::views::{board_view, discard_view, game_view, tray_view};
 
 pub fn show(ui: &mut Ui, game: &Game, drag: &mut DragState) -> Option<AppEvent> {
     let screen = ui.available_rect_before_wrap();
+    game_view::show(ui);
 
     let side_width = screen.width() * SIDE_WIDTH_FRACTION;
     let side_rect = Rect::from_min_max(pos2(screen.right() - side_width, screen.top()), screen.max);

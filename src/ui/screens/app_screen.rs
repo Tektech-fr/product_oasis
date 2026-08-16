@@ -42,7 +42,9 @@ impl eframe::App for OasisApp {
                 }
             }
             AppState::Playing(game) => {
-                if let Some(ev) = game_screen::show(ui, game, &mut self.drag) {
+                if ui.input(|i| i.key_pressed(egui::Key::Escape)) {
+                    self.pending_event = Some(AppEvent::ReturnToMenu);
+                } else if let Some(ev) = game_screen::show(ui, game, &mut self.drag) {
                     self.pending_event = Some(ev);
                 }
             }
